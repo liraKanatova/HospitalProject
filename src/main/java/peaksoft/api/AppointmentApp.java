@@ -1,2 +1,4 @@
-package peaksoft.api;public class AppointmentApp {
+package peaksoft.api;
+
+public class AppointmentApp {
 }

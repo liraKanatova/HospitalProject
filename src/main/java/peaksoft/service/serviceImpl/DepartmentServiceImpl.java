@@ -1,2 +1,4 @@
-package peaksoft.service.serviceImpl;public class DepartmentServiceImpl {
+package peaksoft.service.serviceImpl;
+
+public class DepartmentServiceImpl {
 }

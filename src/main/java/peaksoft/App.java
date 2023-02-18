@@ -1,2 +1,4 @@
-package peaksoft;public class App {
+package peaksoft;
+
+public class App {
 }

@@ -1,4 +1,4 @@
-package peaksoft;
+package peaksoft.config;
 
 
     import jakarta.persistence.EntityManager;
@@ -46,7 +46,7 @@ import java.util.Properties;
             Properties properties = new Properties();
             properties.put("hibernate.show_sql", "true");
             properties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
-            properties.put("hibernate.hbm2ddl.auto", "create");
+            properties.put("hibernate.hbm2ddl.auto", "update");
             return properties;
         }
 

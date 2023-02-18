@@ -1,2 +1,4 @@
-package peaksoft.api;public class DoctorApp {
+package peaksoft.api;
+
+public class DoctorApp {
 }

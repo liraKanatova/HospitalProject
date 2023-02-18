@@ -1,10 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>New Hospital</title>
 </head>
 <body>
+<form th:method="POST" th:action="@{/hospitals/savePage}" th:object="${newHospital}">
+
+    <div>
+        <label for="name">Name</label>
+        <input type="text" th:field="*{name}" id="name">
+    </div>
+
+    <div>
+        <label for="country">Address</label>
+        <input type="text" th:field="*{address}" id="country">
+    </div>
+
+    <div>
+        <label for="image">Image Link</label>
+        <input type="text" th:field="*{image}" id="image">
+    </div>
+
+    <button type="submit">Save Hospital</button>
+
+</form>
+<br>
+<p style="text-align: center">
+    <a class="btn btn-outline-primary" role="button" href="/hospitals/savePage">Add new hospital</a></p>
 
 </body>
 </html>

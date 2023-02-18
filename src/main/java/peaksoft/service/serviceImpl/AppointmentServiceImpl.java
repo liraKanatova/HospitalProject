@@ -1,2 +1,4 @@
-package peaksoft.service.serviceImpl;public class AppointmentServiceImpl {
+package peaksoft.service.serviceImpl;
+
+public class AppointmentServiceImpl {
 }
