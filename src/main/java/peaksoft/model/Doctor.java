@@ -5,7 +5,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import static jakarta.persistence.CascadeType.*;
+
 @Entity
 @Table(name = "doctors")
 @Getter
@@ -24,10 +28,30 @@ public class Doctor {
     private String image;
     @Column(unique = true)
     private String email;
-    @ManyToMany(mappedBy = "doctors",cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH})
+    @ManyToMany(mappedBy = "doctors",cascade = {PERSIST,REFRESH, MERGE, DETACH})
     private List<Department>departments;
-    @OneToMany(mappedBy = "doctor",cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH})
+    @OneToMany(mappedBy = "doctor",cascade = {PERSIST,REFRESH, MERGE, DETACH})
     private List<Appointment>appointments;
-    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH})
+    @ManyToOne(cascade = {PERSIST,PERSIST,MERGE,DETACH})
     private Hospital hospital;
+    @Transient
+    private Long hospitalId;
+    @Transient
+    private List<Long>departmentId=new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "Doctor{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", position='" + position + '\'' +
+                ", image='" + image + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
+
+    public void addDepartment(Department department) {
+        this.departments.add(department);
+    }
 }

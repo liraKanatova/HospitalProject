@@ -7,6 +7,9 @@ import lombok.Setter;
 import peaksoft.enums.Gender;
 
 import java.util.List;
+
+import static jakarta.persistence.CascadeType.*;
+
 @Entity
 @Table(name="patients")
 @Getter
@@ -28,8 +31,10 @@ private String phoneNumber;
 private Gender gender;
 @Column(unique = true)
 private String email;
-@ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REFRESH,CascadeType.DETACH})
+@ManyToOne(cascade = {PERSIST,REFRESH,MERGE,DETACH})
 private Hospital hospital;
-@OneToMany(mappedBy = "patient",cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH})
+@OneToMany(mappedBy = "patient",cascade = {PERSIST, REFRESH, MERGE,DETACH})
 private List<Appointment>appointments;
+@Transient
+private Long hospitalId;
 }

@@ -5,45 +5,61 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 import peaksoft.model.Department;
-import peaksoft.model.Hospital;
+import peaksoft.model.Doctor;
 import peaksoft.repository.DepartmentRepository;
 
 import java.util.List;
 @Repository
 @Transactional
-public class DepartmentRepositoryImpl implements DepartmentRepository {
+public class DepartmentRepositoryImpl  implements DepartmentRepository {
     @PersistenceContext
     private EntityManager entityManager;
-    @Override
-    public void save(Department department,Long hospitalId) {
-        Hospital hospital = entityManager.find(Hospital.class, hospitalId);
-        hospital.aadDepartment(department);
-        department.setHospital(hospital);
-        entityManager.merge(department);
 
+    @Override
+    public Department save(Department department) {
+            entityManager.persist(department);
+            return department;
     }
 
+
     @Override
-    public List<Department> getAllDepartments() {
-        return entityManager.createQuery("select d from Department d", Department.class).getResultList();
+    public List<Department> getAllDepartments(Long hospitalId) {
+            return entityManager.createQuery("select d from Department d join d.hospital h where h.id=:id", Department.class)
+                    .setParameter("id", hospitalId).getResultList();
     }
 
     @Override
     public Department getDepartmentById(Long id) {
-        return entityManager.find(Department.class,id);
+            return entityManager.find(Department.class, id);
     }
 
     @Override
     public void deleteDepartment(Long id) {
-       entityManager.remove(entityManager.find(Department.class,id));
+            entityManager.remove(entityManager.find(Department.class, id));
 
     }
 
     @Override
     public void updateDepartment(Long id, Department updatedDepartment) {
-        Department department = entityManager.find(Department.class, id);
-        department.setName(updatedDepartment.getName());
-        entityManager.merge(department);
+            Department department = entityManager.find(Department.class, id);
+            department.setName(updatedDepartment.getName());
+            entityManager.merge(department);
+}
 
+    @Override
+    public List<Department> findDepartmentsByHospitalId(Long hospitalId) {
+        return entityManager.createQuery("select d from Department d where d.hospital.id = ?1", Department.class)
+                .setParameter(1, hospitalId)
+                .getResultList();
+    }
+
+    @Override
+    public void assignDoctor(Long doctorId, Long departmentId) {
+        Doctor doctor = entityManager.find(Doctor.class, doctorId);
+        Department department = entityManager.find(Department.class, departmentId);
+        doctor.addDepartment(department);
+        department.addDoctor(doctor);
+        entityManager.merge(department);
+        entityManager.merge(doctor);
     }
 }

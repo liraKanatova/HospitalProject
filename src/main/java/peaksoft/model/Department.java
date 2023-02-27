@@ -7,6 +7,9 @@ import lombok.Setter;
 
 
 import java.util.List;
+
+import static jakarta.persistence.CascadeType.*;
+
 @Entity
 @Table(name = "departments")
 @Getter
@@ -18,8 +21,22 @@ public class Department {
     @SequenceGenerator(name = "department_id_gen",sequenceName = "department_seq",allocationSize = 1)
     private Long id;
     private String name;
-    @ManyToMany(cascade = {CascadeType.REFRESH,CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH})
+    @ManyToMany(cascade = {REFRESH,PERSIST,MERGE,DETACH})
     private List<Doctor>doctors;
-    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH})
+    @ManyToOne(cascade = {PERSIST, REFRESH, MERGE,DETACH})
     private Hospital hospital;
+    @Transient
+    private Long hospitalId;
+
+    @Override
+    public String toString() {
+        return "Department{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
+    public void addDoctor(Doctor doctor) {
+        this.doctors.add(doctor);
+    }
 }

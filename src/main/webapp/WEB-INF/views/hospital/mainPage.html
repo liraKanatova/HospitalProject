@@ -20,6 +20,10 @@
 
         crossorigin="anonymous">
 </head>
+<form th:action="@{hospitals}" method="get">
+    <input type="text" name="search" th:value="${search}">
+    <button type="submit">Search</button>
+</form>
 <body>
 
 <div class="container" style="width: 78%; margin: 0 auto">
@@ -29,7 +33,7 @@
   <div class="card" style="width: 18rem;"
        th:each="hospital:${hospitals}">
 
-    <img th:src="${hospital.getImage()}" object-fit width="223" height="170px" class="card-img-top" alt="Hospital's Image">
+    <img th:src="${hospital.getImage()}" object-fit width="223" height="250px" class="card-img-top" alt="Hospital's Image">
 
     <div class="card-body">
 
@@ -42,11 +46,14 @@
        <input type="submit" class="btn btn-outline-primary"  th:value="  Delete  "></input>
 
       </form>
-      <form th:method="GET" th:action="@{/hospitals/{hospitalId}/edit(hospitalId=${hospital.getId()})}">
+      <form th:method="GET" th:action="@{/hospitals/{id}/edit(id=${hospital.getId()})}">
 
         <input type="submit" class="btn btn-outline-primary"  th:value="Udate"></input>
 
       </form>
+        <form th:method="GET" th:action="@{/hospitals/details/{hospitalId}(hospitalId=${hospital.getId()})}">
+            <input type="submit" class="btn btn-primary" th:value="Profile"/>
+        </form>
     </div>
   </div>
 </div>

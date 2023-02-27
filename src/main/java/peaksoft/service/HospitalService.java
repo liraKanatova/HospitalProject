@@ -5,7 +5,7 @@ import peaksoft.model.Hospital;
 import java.util.List;
 
 public interface HospitalService {
-    void save(Hospital hospital);
+    Hospital save(Hospital hospital);
 
 
 
@@ -22,4 +22,7 @@ public interface HospitalService {
 
 
     void updateHospital( Long id,Hospital updatedHospital);
+
+    List<Hospital> getAllHospitals(String search);
+
 }

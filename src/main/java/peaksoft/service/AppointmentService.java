@@ -1,15 +1,16 @@
 package peaksoft.service;
 
+import org.springframework.stereotype.Service;
 import peaksoft.model.Appointment;
 
 import java.util.List;
-
+@Service
 public interface AppointmentService {
-    void save(Appointment appointment,Long hospitalId);
+    Appointment save(Long id,Appointment appointment);
 
 
 
-    List<Appointment> getAllAppointments();
+    List<Appointment> getAllAppointments(Long hospitalId);
 
 
 

@@ -10,32 +10,24 @@
 <body>
 
 <div class="wrapper-btn">
-  <a th:href="@{/hospitals}">
+  <a th:href="@{/departments}">
     <button class="btn btn-primary" type="button">back</button>
   </a>
 </div>
 
 <div class="d-flex justify-content-center">
-  <form class="p-5 bg-light"  th:action="@{/hospitals/{id}/update (id=${hospital.getId()})}" th:object="${hospital}" th:method="PUT">
+  <form class="p-5 bg-light"  th:action="@{/departments/{id}/update/{depId}(id=${hospitalId},depId=${departmentId})}" th:object="${department}" th:method="PUT">
+    <input type="hidden" th:field="*{id}">
 
-    <div>
+    <div class="form-group">
       <label for="name" class="form-label">Name </label>
       <input type="text" th:field="*{name}" id="name" class="form-control form-control-lg">
     </div>
 
     <div>
-      <label for="input" class="form-label">Address </label>
-      <input type="text" th:field="*{address}" id="input" class="form-control form-control-lg">
+<button type="submit">Update</button>
+      <p style="text-align: center">
     </div>
-
-    <div>
-      <label for="logo" class="form-label">Image link</label>
-      <input type="text" th:field="*{image}" id="logo" class="form-control form-control-lg">
-    </div>
-
-
-
-    <button type="submit" class="bnt btn-primary">Update</button>
 
   </form>
 </div>
@@ -45,4 +37,5 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
+
 </html>

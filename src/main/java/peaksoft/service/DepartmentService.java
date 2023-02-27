@@ -1,15 +1,17 @@
 package peaksoft.service;
 
+import org.springframework.stereotype.Service;
 import peaksoft.model.Department;
 
 import java.util.List;
+@Service
 
 public interface DepartmentService {
-    void save(Department department,Long hospitalId);
+    Department save(Long id,Department department);
 
 
 
-    List<Department> getAllDepartments();
+    List<Department> getAllDepartments(Long hospitalId);
 
 
 
@@ -22,4 +24,8 @@ public interface DepartmentService {
 
 
     void updateDepartment( Long id,Department updatedDepartment);
+
+    List<Department> findDepartmentsByHospitalId(Long hospitalId);
+
+    void assignDoctor(Long doctorId, Long departmentId);
 }

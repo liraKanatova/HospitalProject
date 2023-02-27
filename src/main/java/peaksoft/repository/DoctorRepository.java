@@ -5,7 +5,7 @@ import peaksoft.model.Doctor;
 import java.util.List;
 
 public interface DoctorRepository {
-    void save(Doctor doctor,Long hospitalId);
+    Doctor save(Long id,Doctor doctor);
 
 
 
@@ -18,9 +18,13 @@ public interface DoctorRepository {
 
 
     void deleteDoctor(Long id);
+    List<Doctor>getAll(Long id);
 
 
 
     void updateDoctor( Long id,Doctor updatedDoctor);
-    void assignDoctorToDepartment(Long doctorId,Long departmentId);
+
+    List<Doctor> findDoctorsByHospitalId(Long hospitalId);
+
+
 }

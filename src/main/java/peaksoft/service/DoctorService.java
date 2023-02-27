@@ -1,11 +1,12 @@
 package peaksoft.service;
 
+import org.springframework.stereotype.Service;
 import peaksoft.model.Doctor;
 
 import java.util.List;
-
-public interface DoctorServiceImpl {
-    void save(Doctor doctor,Long hospitalId);
+@Service
+public interface DoctorService {
+    Doctor save(Long id,Doctor doctor);
 
 
 
@@ -17,10 +18,13 @@ public interface DoctorServiceImpl {
 
 
 
+    List<Doctor> getAll(Long id);
+
     void deleteDoctor(Long id);
 
 
 
     void updateDoctor( Long id,Doctor updatedDoctor);
-    void assignDoctorToDepartment(Long doctorId,Long departmentId);
+
+    List<Doctor> findDoctorsByHospitalId(Long hospitalId);
 }

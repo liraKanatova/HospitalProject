@@ -5,11 +5,11 @@ import peaksoft.model.Patient;
 import java.util.List;
 
 public interface PatientRepository {
-    void save(Patient patient,Long hospitalId);
+    Patient save(Patient patient);
 
 
 
-    List<Patient> getAllPatients();
+    List<Patient> getAllPatients(Long hospitalId);
 
 
 

@@ -22,38 +22,59 @@ public class Hospital {
     private String image;
 
 
-    @OneToMany(mappedBy = "hospital",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "hospital",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Doctor>doctors;
     public void addDoctor(Doctor doctor){
-        if(doctors==null){
-            doctors=new ArrayList<>();
+        if (doctor != null){
+           doctors.add(doctor);
+        }else {
+            throw new NullPointerException();
         }
-        doctors.add(doctor);
     }
-    @OneToMany(mappedBy = "hospital",cascade = CascadeType.ALL)
-    private List<Patient>patients;
 
+//    public void addDoctor(Doctor doctor){
+//        if(doctors==null){
+//            doctors=new ArrayList<>();
+//        }
+//        doctors.add(doctor);
+   // }
+    @OneToMany(mappedBy = "hospital",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Patient>patients;
+//    public void addPatient(Patient patient){
+//        if (patient != null){
+//            patients.add(patient);
+//        }else {
+//            throw new NullPointerException();
+//        }
     public void addPatient(Patient patient){
-        if ( patients == null){
+        if ( patient == null){
             patients = new ArrayList<>();
         }
         patients.add(patient);
     }
-    @OneToMany (mappedBy = "hospital",cascade = CascadeType.ALL)
+    @OneToMany (mappedBy = "hospital",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<Department>departments;
-    public void aadDepartment(Department department){
-        if(departments==null){
-            departments=new ArrayList<>();
+    public void addDepartment(Department department){
+        if (department != null){
+            departments.add(department);
+        }else {
+            throw new NullPointerException();
         }
-        departments.add(department);
-    }
-    @OneToMany(cascade = CascadeType.ALL)
+//    public void aadDepartment(Department department){
+//        if(departments==null){
+//            departments=new ArrayList<>();
+//        }
+//        departments.add(department);
+  }
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Appointment>appointments;
     public void addAppointment(Appointment appointment){
-        if(appointments==null){
-            appointments=new ArrayList<>();
-        }
-        appointments.add(appointment);
+       if (appointment != null){
+           appointments.add(appointment);
+       }else {
+           throw new NullPointerException();
+       }
     }
+
 
 }

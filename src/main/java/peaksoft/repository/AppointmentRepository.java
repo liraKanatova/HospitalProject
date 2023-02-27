@@ -5,11 +5,11 @@ import peaksoft.model.Appointment;
 import java.util.List;
 
 public interface AppointmentRepository {
-    void save(Appointment appointment,Long hospitalId);
+    Appointment save(Appointment appointment);
 
 
 
-    List<Appointment> getAllAppointments();
+    List<Appointment> getAllAppointments(Long hospitalId);
 
 
 
