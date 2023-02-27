@@ -3,7 +3,9 @@ package peaksoft.service.serviceImpl;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import peaksoft.model.Appointment;
 import peaksoft.model.Doctor;
+import peaksoft.repository.AppointmentRepository;
 import peaksoft.repository.DepartmentRepository;
 import peaksoft.repository.DoctorRepository;
 import peaksoft.repository.HospitalRepository;
@@ -17,6 +19,7 @@ public class DoctorServiceImpl implements DoctorService {
     private final DoctorRepository doctorRepository;
     private final HospitalRepository hospitalRepository;
     private final DepartmentRepository departmentRepository;
+    private final AppointmentRepository appointmentRepository;
     @Override
     public Doctor save(Long id,Doctor doctor) {
          Doctor doctor1 = new Doctor();
@@ -53,7 +56,15 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public void deleteDoctor(Long id) {
-           doctorRepository.deleteDoctor(id);
+          Doctor doctor = doctorRepository.getDoctorById(id);
+          List<Appointment> appointments = doctor.getAppointments();
+          if(appointments != null){
+              List<Appointment>appointmentList = appointments.stream().filter(s-> s.getDoctor().getId().equals(id)).toList();
+              appointmentList.forEach(s->appointmentRepository.deleteAppointment(s.getId()));
+          }
+          List<Doctor>doctors = doctor.getHospital().getDoctors();
+          doctors.removeIf(d->d.getId().equals(id));
+          doctorRepository.deleteDoctor(id);
 
 
     }

@@ -53,13 +53,5 @@ public class DepartmentRepositoryImpl  implements DepartmentRepository {
                 .getResultList();
     }
 
-    @Override
-    public void assignDoctor(Long doctorId, Long departmentId) {
-        Doctor doctor = entityManager.find(Doctor.class, doctorId);
-        Department department = entityManager.find(Department.class, departmentId);
-        doctor.addDepartment(department);
-        department.addDoctor(doctor);
-        entityManager.merge(department);
-        entityManager.merge(doctor);
-    }
+
 }

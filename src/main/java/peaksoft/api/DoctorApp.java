@@ -62,11 +62,6 @@ public class DoctorApp {
         return "redirect:/doctors/"+hospitalId;
     }
 
-    @PostMapping("/{doctorId}/assignDoctor")
-    public String assignDoctor(@PathVariable("doctorId") Long doctorId, @ModelAttribute("department")Department department){
-        Long id = department.getId();
-        departmentService.assignDoctor(doctorId, id);
-        return "redirect:/doctors"+hospitalId;
-    }
+
 
 }

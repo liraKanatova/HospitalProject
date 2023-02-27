@@ -26,6 +26,6 @@ public interface DepartmentRepository {
 
     List<Department> findDepartmentsByHospitalId(Long hospitalId);
 
-    void assignDoctor(Long doctorId, Long departmentId);
+
 
 }

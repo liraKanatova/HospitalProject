@@ -27,5 +27,5 @@ public interface DepartmentService {
 
     List<Department> findDepartmentsByHospitalId(Long hospitalId);
 
-    void assignDoctor(Long doctorId, Long departmentId);
+
 }

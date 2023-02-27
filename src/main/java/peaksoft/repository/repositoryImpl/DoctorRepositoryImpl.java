@@ -40,7 +40,7 @@ public class DoctorRepositoryImpl  implements DoctorRepository {
 
     @Override
     public void deleteDoctor(Long id) {
-//        entityManager.remove(entityManager.find(Doctor.class,id));
+
         try{
             entityManager.createQuery("delete from Doctor d where d.id = :id")
                     .setParameter("id",id).executeUpdate();
